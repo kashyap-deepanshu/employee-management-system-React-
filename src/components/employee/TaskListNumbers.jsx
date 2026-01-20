@@ -1,8 +1,8 @@
 import React from "react";
-import NewTask from "../components/TaskLists/NewTask";
-import ActiveTask from "../components/TaskLists/ActiveTask";
-import CompleteTask from "../components/TaskLists/CompleteTask"; 
-import FailedTask from "../components/TaskLists/FailedTask";
+import NewTask from "../TaskLists/NewTask";
+import ActiveTask from "../TaskLists/ActiveTask";
+import CompleteTask from "../TaskLists/CompleteTask"; 
+import FailedTask from "../TaskLists/FailedTask";
 
 
 
@@ -17,5 +17,4 @@ const TaskListNumbers = ({user}) => {
     );
 };
 
-export default TaskListNumbers;
- 
+export default TaskListNumbers; 

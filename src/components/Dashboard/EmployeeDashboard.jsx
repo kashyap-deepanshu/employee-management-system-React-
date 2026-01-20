@@ -1,9 +1,9 @@
 import React, { useContext } from 'react'
 import Header from '../../others/Header'
-import TaskListNumbers from '../../others/TaskListNumbers'
+import TaskListNumbers from '../employee/TaskListNumbers'
 import TaskList from '../TaskLists/TaskList'
 import { AuthContext } from '../../context/AuthProvider' 
-import TaskCards from '../TaskLists/TaskCards'
+// import TaskCards from '../TaskLists/TaskCards'
 
 const EmployeeDashboard = ({loggedEmail}) => { 
   const authContext =useContext(AuthContext)

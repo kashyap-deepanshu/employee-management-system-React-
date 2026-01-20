@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
+import TaskDetails from "../employee/TaskDetails";
 import { AuthContext } from "../../context/AuthProvider";
-import TaskDetails from "../../others/TaskDetails";
 
 const TaskList = ({ user }) => { 
   const { showTaskDetail } = useContext(AuthContext);

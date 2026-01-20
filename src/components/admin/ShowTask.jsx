@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { AuthContext } from "../context/AuthProvider";
+import { AuthContext } from "../../context/AuthProvider";
 
 const getStatus = (task) => {
   if (task.newTask) return { label: "New", style: "bg-blue-100 text-blue-700" };
