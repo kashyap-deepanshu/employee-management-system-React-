@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { AuthContext } from '../../context/AuthProvider';
 
 const TaskDetails = ({ t, user }) => {
-  const { showTaskDetail, authData, setAuthData } = useContext(AuthContext);
+  const { showTaskDetail, authData, setAuthData } = useContext(AuthContext  );
 
 
   const updatedTask = () => {

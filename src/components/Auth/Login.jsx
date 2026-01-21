@@ -1,17 +1,63 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../../context/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
-const Login = ({handleLogin}) => {
-  // const [isAdmin, setIsAdmin] = useState(false)
-  const {isAdmin,setIsAdmin,email,setEmail,password,setPassword }=useContext(AuthContext);
- 
+const Login = () => {
+  const navigate = useNavigate();
 
-  const submitHandler=(e)=>{
+  const {
+    isAdmin,
+    setIsAdmin,
+    email,
+    setEmail,
+    password,
+    setPassword,
+    authData,
+    setLogin,
+    setLoggedEmail,
+  } = useContext(AuthContext);
+
+  const submitHandler = (e) => {
     e.preventDefault();
-    handleLogin(email,password)
-    setEmail('')  
-    setPassword('')
-  } 
+
+    if (isAdmin) {
+      const adminUser = authData?.admin?.find(
+        (e) => e.email === email && e.password === password
+      );
+
+      if (adminUser) {
+        localStorage.setItem(
+          "loggedUser",
+          JSON.stringify({ email, role: "admin" })
+        );
+        setLoggedEmail(email);
+        setLogin(true);
+        navigate("/admin/dashboard", { replace: true });
+      } else {
+        alert("Invalid Credentials");
+      }
+    } else {
+      const employeeUser = authData?.employees?.find(
+        (e) => e.email === email && e.password === password
+      );
+
+      if (employeeUser) {
+        localStorage.setItem(
+          "loggedUser",
+          JSON.stringify({ email, role: "employee" })
+        );
+        setLoggedEmail(email);
+        setLogin(true);
+        navigate("/employee/dashboard", { replace: true });
+      } else {
+        alert("Invalid Credentials");
+      }
+    }
+
+    setEmail("");
+    setPassword("");
+  };
+
   return (
     <>
       <div className="flex h-screen w-screen  bg-emerald-900  ">
@@ -56,3 +102,4 @@ const Login = ({handleLogin}) => {
 };
 
 export default Login;
+

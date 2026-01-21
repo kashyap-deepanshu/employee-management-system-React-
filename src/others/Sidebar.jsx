@@ -1,37 +1,35 @@
-import React, { useState } from 'react'
+import { NavLink } from "react-router-dom";
 
-const Sidebar = ({showPage, setShowPage }) => {
-    const style = 'py-5 active:scale-98 hover:bg-emerald-100 hover:text-emerald-950 transition border-y px-10 w-full rounded-r-md  '
-    return (
-        <div className="w-[20%] h-full  bg-emerald-950 border-r-emerald-800 border flex flex-col items-start text-2xl  ">
-            <button onClick={() => {
-                setShowPage("dashboard")
+const Sidebar = () => {
+  const base =
+    "py-5 border-y px-10 w-full rounded-r-md text-2xl transition hover:bg-emerald-100 hover:text-emerald-950";
 
-            }} className={`${style} ${showPage==="dashboard"?"bg-emerald-100 text-black" :"text-white"} `}>Dashboard</button>
+  const active = "bg-emerald-100 text-black";
+  const inactive = "text-white";
 
-            <button onClick={() => {
-                setShowPage("createTask")
+  return (
+    <div className="w-[20%] h-full bg-emerald-950 border-r-emerald-800 border flex flex-col items-start">
+      <NavLink to="/admin/dashboard" className={({ isActive }) => `${base} ${isActive ? active : inactive}`}>
+        Dashboard
+      </NavLink>
 
-            }} className={`${style} ${showPage==="createTask"?"bg-emerald-100 text-black" :"text-white"} `}>Create Task</button>
+      <NavLink to="/admin/create-task" className={({ isActive }) => `${base} ${isActive ? active : inactive}`}>
+        Create Task
+      </NavLink>
 
-            <button onClick={() => {
-                setShowPage("addEmployee")
+      <NavLink to="/admin/add-employee" className={({ isActive }) => `${base} ${isActive ? active : inactive}`}>
+        Add Employee
+      </NavLink>
 
-            }} className={`${style} ${showPage==="addEmployee"?"bg-emerald-100 text-black" :"text-white"} `}>Add Employee</button>
+      <NavLink to="/admin/show-task" className={({ isActive }) => `${base} ${isActive ? active : inactive}`}>
+        Show Tasks
+      </NavLink>
 
-            <button onClick={() => {
-                setShowPage("showTask")
+      <NavLink to="/admin/show-employee" className={({ isActive }) => `${base} ${isActive ? active : inactive}`}>
+        Show Employees
+      </NavLink>
+    </div>
+  );
+};
 
-            }} className={`${style} ${showPage==="showTask"?"bg-emerald-100 text-black" :"text-white"} `}>Show Tasks</button>
-
-            <button onClick={() => {
-                setShowPage("showEmployee")
-
-            }} className={`${style} ${showPage==="showEmployee"?"bg-emerald-100 text-black" :"text-white"} `}>Show Employee's</button>
-
-
-        </div>
-    )
-}
-
-export default Sidebar
+export default Sidebar;

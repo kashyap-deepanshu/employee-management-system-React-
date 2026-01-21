@@ -5,7 +5,7 @@ import { totalActiveTasks, totalCompletedTasks, totalEmployees, totalTasks } fro
 
 const Dashboard = () => {
   return (
-    <div className="bg-gray-100 min-h-screen p-10 w-full">
+    <div className="bg-gray-100 h-full p-10 w-full">
       <h1 className="text-2xl font-semibold mb-8">Admin Dashboard</h1>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">

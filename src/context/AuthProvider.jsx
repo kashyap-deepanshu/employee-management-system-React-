@@ -16,11 +16,15 @@ const AuthProvider = ({ children }) => {
     let completedCount=0;
     let newTaskCount=0;
 
+     useEffect(() => {
+        const storedUser = JSON.parse(localStorage.getItem("loggedUser"))
     
-
-    
-
-
+          if(storedUser){
+          setLogin(true)
+          setLoggedEmail(storedUser.email);
+          storedUser.role==='admin'?setIsAdmin(true):setIsAdmin(false)
+        }    
+      }, [])
     useEffect(() => {
         const { employees, admin } = getLocalStorage();
         setAuthData({ employees, admin });
