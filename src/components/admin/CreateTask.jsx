@@ -9,6 +9,9 @@ const CreateTask = () => {
     const [taskDescription, setTaskDescription] = useState("");
     const {authData, setAuthData } = useContext(AuthContext);
 
+    const today = new Date().toISOString().split("T")[0];
+
+
     // this is used to give select employee name option to create Task
     let empName=[]
     authData.employees.map((e)=>{
@@ -90,6 +93,7 @@ const CreateTask = () => {
                             <label className="block text-gray-600 mb-1">Due Date</label>
                             <input
                                 value={taskDueDate}
+                                min={today}
                                 onChange={(e) => {
                                     setTaskDueDate(e.target.value);
                                 }}

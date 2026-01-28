@@ -1,10 +1,12 @@
+
 // count.jsx
 
 
-const employees =JSON.parse(localStorage.getItem("employees"))
+const employees =JSON.parse(localStorage.getItem("employees")) ||[]
 // --------------------
 // BASIC COUNTS
 // --------------------
+
 
 export const totalEmployees = employees.length;
 

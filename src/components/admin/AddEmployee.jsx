@@ -13,57 +13,53 @@ const AddEmployee = () => {
 
     const authContext = useContext(AuthContext);
     const { authData, setAuthData, empIdCount, setEmpIdCount } = authContext
-    const [employees, setEmployees] = useState(authData.employees)
+    // const [employees, setEmployees] = useState(authData.employees)
+    // const updatedEmployees = [...authData.employees, newEmployee] || []
 
     // console.log(authData.employees[0])
     // console.log(employees);
 
     const empSubmitHandler = (e) => {
-        e.preventDefault();
-        const newEmployee = {
-            id: empIdCount,
-            role: "employee",
-            firstName: firstName,
-            lastName: lastName,
-            email: firstName + "@e.com",
-            password: "123",
-            address: address,
-            dateOfJoining: joinDate,
-            department: deptName,
-            designation: designation,
-            employmentType: empType,
-            status: empStatus,
-            tasks: [],
-        };
-        setEmployees((prevEmployees) => {
-            const updatedEmployees = [...prevEmployees, newEmployee];
+  e.preventDefault();
 
-            // ✅ localStorage update
-            localStorage.setItem(
-                "employees",
-                JSON.stringify(updatedEmployees)
-            );
+  const newEmployee = {
+    id: empIdCount,
+    role: "employee",
+    firstName,
+    lastName,
+    email: firstName + "@e.com",
+    password: "123",
+    address,
+    dateOfJoining: joinDate,
+    department: deptName,
+    designation,
+    employmentType: empType,
+    status: empStatus,
+    tasks: [],
+  };
 
-            // ✅ context update
-            setAuthData({
-                ...authData,
-                employees: updatedEmployees,
-            });
+  const  updatedEmployees = [...authData.employees, newEmployee];
 
-            return updatedEmployees;
-        });
+  localStorage.setItem("employees", JSON.stringify(updatedEmployees));
 
-        setAddress('');
-        setDeptName('');
-        setDesignation('');
-        setEmpStatus('');
-        setEmpType('');
-        setJoinDate('');
-        setFirstName('');
-        setLastName('');
-        setEmpIdCount(empIdCount + 1)
+  setAuthData({
+    ...authData,
+    employees: updatedEmployees,
+  });
 
-    };
+  setEmpIdCount(empIdCount + 1);
+
+  // reset form
+  setFirstName("");
+  setLastName("");
+  setJoinDate("");
+  setAddress("");
+  setDeptName("");
+  setDesignation("");
+  setEmpType("");
+  setEmpStatus("");
+};
+
     return (
         <div className="flex justify-center p-10">
             <form

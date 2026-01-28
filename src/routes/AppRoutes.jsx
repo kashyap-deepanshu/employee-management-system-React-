@@ -36,22 +36,22 @@ const AppRoutes = () => {
 
       {/* ADMIN (LAYOUT + NESTED ROUTES) */}
       <Route
-  path="/admin"
-  element={
-    login && isAdmin ? (
-      <AdminDashboard loggedEmail={loggedEmail} />
-    ) : (
-      <Navigate to="/login" />
-    )
-  }
->
-  <Route index element={<Dashboard />} />
-  <Route path="dashboard" element={<Dashboard />} />
-  <Route path="create-task" element={<CreateTask />} />
-  <Route path="add-employee" element={<AddEmployee />} />
-  <Route path="show-task" element={<ShowTask />} />
-  <Route path="show-employee" element={<ShowEmployee />} />
-</Route>
+        path="/admin"
+        element={
+          login && isAdmin ? (
+            <AdminDashboard loggedEmail={loggedEmail} />
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
+      >
+        <Route index element={<Dashboard />} />
+        <Route path="dashboard" element={<Dashboard />} />
+        <Route path="create-task" element={<CreateTask />} />
+        <Route path="add-employee" element={<AddEmployee />} />
+        <Route path="show-task" element={<ShowTask />} />
+        <Route path="show-employee" element={<ShowEmployee />} />
+      </Route>
 
       {/* EMPLOYEE */}
       <Route
