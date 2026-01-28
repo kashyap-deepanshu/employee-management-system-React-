@@ -1,0 +1,149 @@
+import { useContext, useState } from "react";
+import { AuthContext } from "../../context/AuthProvider";
+import { ArrowUpDown } from 'lucide-react';
+import React from "react";
+
+
+const getStatus = (task) => {
+  if (task.newTask) return { label: "New", style: "bg-blue-100 text-blue-700" };
+  if (task.active) return { label: "Active", style: "bg-yellow-100 text-yellow-700" };
+  if (task.completed) return { label: "Completed", style: "bg-green-100 text-green-700" };
+  if (task.failed) return { label: "Failed", style: "bg-red-100 text-red-700" };
+};
+
+export default function ShowTask() {
+  const [isDueDateSort, setIsDueDateSort] = useState(false)
+  const [expandedTaskIndex, setExpandedTaskIndex] = useState(null);
+  const [searchText, setSearchText] = useState('')
+  const { authData } = useContext(AuthContext);
+  const employees = authData?.employees || []
+
+
+  // main sorting ,searching logic to manipulate our show task list
+  const allTasks = employees.flatMap(emp =>
+    emp.tasks.map(task => ({
+      ...task, employeeName: `${emp.firstName} ${emp.lastName}`,
+    }))
+  )
+  const filteredTasks = allTasks.filter(task =>
+    task.taskTitle.toLowerCase().includes(searchText.toLowerCase()) ||
+    task.category.toLowerCase().includes(searchText.toLowerCase()) ||
+    task.taskDescription.toLowerCase().includes(searchText.toLowerCase())     
+  )
+  
+  
+
+  const today = new Date();
+
+  const finalTasks = isDueDateSort
+    ? [...filteredTasks]
+      // 1️⃣ Sirf future tasks
+      .filter(task => new Date(task.taskDueDate) >= today)
+      // 2️⃣ Nearest due date first
+      .sort((a, b) => new Date(a.taskDueDate) - new Date(b.taskDueDate))
+    : filteredTasks;
+
+    return (
+    <div className="bg-white  rounded-xl border border-gray-200 shadow-sm h-full overflow-hidden">
+
+      {/* Header */}
+      <div className="px-6 py-4 border-b flex justify-between items-center  ">
+        <h2 className="text-lg font-semibold text-gray-800">
+          Tasks
+        </h2>
+
+        <input onChange={(e) => {
+          setSearchText(e.target.value)
+        }}
+          type="text"
+          value={searchText}
+          placeholder="Search task..."
+          className="px-3 py-2 text-sm border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+        />
+      </div>
+
+      {/* Table */}
+      <div className="overflow-y-auto h-full">
+        <table className="w-full text-sm">
+          <thead className="bg-gray-50 text-gray-600 uppercase  text-xs sticky top-0 ">
+            <tr>
+              <th className="px-6 py-5 text-left">Task</th>
+              <th className="px-6 py-5">Category</th>
+              <th className="px-6 py-5">Created Date</th>
+              <th onClick={() => {
+                isDueDateSort ? setIsDueDateSort(false) : setIsDueDateSort(true)
+                console.log("hello");
+
+              }
+              }
+                className="flex justify-center items-center px-6 py-5">Due Date<ArrowUpDown className={` mx-2 p-2 ${isDueDateSort ? "bg-blue-100 rounded-xl" : ''}`} size={30} /></th>
+
+              <th className="px-6 py-5">Status</th>
+              <th className="px-6 py-5 text-right">Action</th>
+            </tr>
+          </thead>
+
+          <tbody className="divide-y">
+            {finalTasks.map((task, index) => {
+              const status = getStatus(task);
+
+              return (
+                <React.Fragment key={`${task.taskTitle}-${index}`}>
+                  <tr key={index} className="hover:bg-gray-50">
+                    <td className="px-6 py-4">
+                      <p className="font-medium text-gray-800">{task.taskTitle}</p>
+                      <p className="text-xs text-gray-500">{task.taskDescription}</p>
+                    </td>
+
+                    <td className="px-6 py-4 text-center">{task.category}</td>
+                    <td className="px-6 py-4 text-center">{task.taskDate}</td>
+                    <td className="px-6 py-4 text-center">{task.taskDueDate}</td>
+
+                    <td className="px-6 py-4 text-center">
+                      <span
+                        className={`px-3 py-1 rounded-full text-xs font-medium ${status.style}`}
+                      >
+                        {status.label}
+                      </span>
+                    </td>
+
+                    <td className="px-6 py-4 text-right">
+                      <button
+                        onClick={() =>
+                          setExpandedTaskIndex(
+                            expandedTaskIndex === index ? null : index
+                          )
+                        }
+                        className="text-blue-600 hover:underline"
+                      >
+                        {expandedTaskIndex === index ? "Hide" : "View"}
+                      </button>
+                    </td>
+                  </tr>
+
+                  {expandedTaskIndex === index && (
+                    <tr className="bg-gray-50" key={`${index}-details`}>
+                      <td colSpan="6" className="px-6 py-4">
+                        <div className="text-sm text-gray-700 space-y-1">
+                          <p><b>Description:</b> {task.taskDescription}</p>
+                          <p><b>Category:</b> {task.category}</p>
+                          <p><b>Status:</b> {status.label}</p>
+                          <p><b>Assign To:</b> {task.employeeName}</p>
+
+                          <p><b>Created Date:</b> {task.taskDate}</p>
+                          <p><b>Due Date:</b> {task.taskDueDate}</p>
+
+                        </div>
+                      </td>
+                    </tr>
+                  )}
+                </React.Fragment>
+              );
+            })}
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
