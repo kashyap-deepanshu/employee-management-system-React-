@@ -17,7 +17,7 @@ const EmployeeDashboard = ({loggedEmail}) => {
     );
   }else{
   return (
-    <div className='h-screen w-screen bg-emerald-900 text-white '>
+<div className="min-h-screen w-full bg-emerald-900 text-white">
         <Header firstName={user?.firstName} />
         <TaskListNumbers user={user}/> 
         <TaskList user={user}/>

@@ -4,7 +4,7 @@ import { AuthContext } from "../../context/AuthProvider";
 const EditEmployeeModal = ({ employee, closeModal }) => {
 
     const authContext = useContext(AuthContext)
-    const { authData, setAuthData } = authContext
+    const { authData, setAuthData } = authContext 
 
     const [formData, setFormData] = useState({
         id: "",

@@ -8,7 +8,18 @@ import FailedTask from "../TaskLists/FailedTask";
 
 const TaskListNumbers = ({user}) => {
     return (
-        <div className="p-10 flex gap-10 w-full text-3xl font-semibold text-center ">
+        <div className="
+    p-4 sm:p-6 lg:p-10
+    grid 
+    grid-cols-1 
+    sm:grid-cols-2 
+    lg:grid-cols-4
+    gap-4 sm:gap-6 lg:gap-10
+    w-full
+    text-xl sm:text-2xl lg:text-3xl
+    font-semibold 
+    text-center
+  "> 
             <NewTask  user={user}/>
             <ActiveTask user={user}/>
             <CompleteTask user={user}/>
