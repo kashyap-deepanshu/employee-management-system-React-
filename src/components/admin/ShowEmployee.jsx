@@ -141,20 +141,21 @@ const ShowEmployee = () => {
                       <p><b>Name:</b> {`${emp.firstName} ${emp.lastName}`}</p>
                       <p><b>Address:</b> {emp.address}</p>
                       <p><b>Assigned Tasks</b></p>
-                      {emp.tasks.map((task, i) => {
-                        return (
-                          <div className='my-5'>
-                            <h1 className='font-bold '>Task:{i + 1}</h1>
-                            <p className='px-5'><b>Title: </b>{task.taskTitle}</p>
-                            <p className='px-5'><b>Description: </b>{task.taskDescription}</p>
-                            <p className='px-5'><b>Created Date: </b>{task.taskDate}</p>
-                            <p className='px-5'><b>Due Date: </b>{task.taskDueDate}</p>
+                      {emp.tasks && emp.tasks.length > 0 ? (
+                        emp.tasks.map((task, i) => (
+                          <div key={task.taskId || i} className="my-5">
+                            <h1 className="font-bold">Task: {i + 1}</h1>
+                            <p className="px-5"><b>Title:</b> {task.taskTitle}</p>
+                            <p className="px-5"><b>Description:</b> {task.taskDescription}</p>
+                            <p className="px-5"><b>Created Date:</b> {task.taskDate}</p>
+                            <p className="px-5"><b>Due Date:</b> {task.taskDueDate}</p>
                           </div>
-
-                        )
-                      })}
-
-
+                        ))
+                      ) : (
+                        <p className="text-sm text-gray-500 italic mt-2">
+                          No task available
+                        </p>
+                      )}
                     </div>
                   </td>
                 </tr>
@@ -164,7 +165,7 @@ const ShowEmployee = () => {
           )}
         </tbody>
       </table>
-      
+
       {isEditOpen && (
         <EditEmployeeModal
           employee={selectedEmployee}

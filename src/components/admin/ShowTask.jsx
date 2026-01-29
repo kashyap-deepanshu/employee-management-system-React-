@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthProvider";
 import { ArrowUpDown } from 'lucide-react';
 import React from "react";
+import EditTaskModal from "../modal/EditTaskModal";
 
 
 const getStatus = (task) => {
@@ -16,7 +17,10 @@ export default function ShowTask() {
   const [expandedTaskIndex, setExpandedTaskIndex] = useState(null);
   const [searchText, setSearchText] = useState('')
   const { authData } = useContext(AuthContext);
-  const employees = authData?.employees || [  ]
+  const employees = authData?.employees || []
+
+  const [isEditTaskOpen, setIsEditTaskOpen] = useState(false);
+  const [selectedTask, setSelectedTask] = useState(null);
 
 
   // main sorting ,searching logic to manipulate our show task list
@@ -28,10 +32,10 @@ export default function ShowTask() {
   const filteredTasks = allTasks.filter(task =>
     task.taskTitle.toLowerCase().includes(searchText.toLowerCase()) ||
     task.category.toLowerCase().includes(searchText.toLowerCase()) ||
-    task.taskDescription.toLowerCase().includes(searchText.toLowerCase())     
+    task.taskDescription.toLowerCase().includes(searchText.toLowerCase())
   )
-  
-  
+
+
 
   const today = new Date();
 
@@ -43,7 +47,12 @@ export default function ShowTask() {
       .sort((a, b) => new Date(a.taskDueDate) - new Date(b.taskDueDate))
     : filteredTasks;
 
-    return (
+  const handleEditTask = (task) => {
+    setSelectedTask(task);
+    setIsEditTaskOpen(true);
+  };
+
+  return (
     <div className="bg-white  rounded-xl border border-gray-200 shadow-sm h-full overflow-hidden">
 
       {/* Header */}
@@ -118,6 +127,12 @@ export default function ShowTask() {
                       >
                         {expandedTaskIndex === index ? "Hide" : "View"}
                       </button>
+                      <button
+                        onClick={() => handleEditTask(task)}
+                        className="pl-2 py-1  text-blue-600 rounded"
+                      >
+                        Edit
+                      </button>
                     </td>
                   </tr>
 
@@ -143,6 +158,12 @@ export default function ShowTask() {
 
           </tbody>
         </table>
+        {isEditTaskOpen && (
+        <EditTaskModal
+          task={selectedTask}
+          closeTaskModal={() => setIsEditTaskOpen(false)}
+        />
+      )}
       </div>
     </div>
   );
