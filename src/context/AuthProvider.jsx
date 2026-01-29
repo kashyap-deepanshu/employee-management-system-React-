@@ -10,6 +10,7 @@ const AuthProvider = ({ children }) => {
     const [login, setLogin] = useState(false);
     const [loggedEmail, setLoggedEmail] = useState('');
     const [empIdCount, setEmpIdCount] = useState(6)
+    const [taskIdCount, setTaskIdCount] = useState(120)
 
     let failedCount = 0;
     let activeTaskCount = 0;
@@ -44,7 +45,7 @@ const AuthProvider = ({ children }) => {
                 {
                     authData, setAuthData, isAdmin, setIsAdmin, email, setEmail, password, setPassword, showTaskDetail, setShowTaskDetail, loggedEmail, setLoggedEmail, login, setLogin,
 
-                    failedCount, newTaskCount, completedCount, activeTaskCount, empIdCount, setEmpIdCount
+                    failedCount, newTaskCount, completedCount, activeTaskCount, empIdCount, setEmpIdCount ,taskIdCount,setTaskIdCount
                 }}>
                 {children}
             </AuthContext.Provider>

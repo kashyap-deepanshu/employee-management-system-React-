@@ -16,15 +16,7 @@ const EditEmployeeModal = ({ employee, closeModal }) => {
         employmentType: '',
         status: ''
     });
-    console.log(employee);
-    authData.employees.map((item) => {
-        if (item === employee) {
-            console.log(item);
-
-
-        }
-
-    })
+   
 
 
     useEffect(() => {

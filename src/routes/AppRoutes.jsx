@@ -16,55 +16,59 @@ const AppRoutes = () => {
   const { login, isAdmin, loggedEmail } = useContext(AuthContext);
 
   return (
-    <Routes>
-      {/* Default */}
-      <Route path="/" element={<Navigate to="/login" />} />
+<Routes>
+  {/* Default */}
+  <Route path="/" element={<Navigate to="/login" replace />} />
 
-      {/* Login */}
-      <Route
-        path="/login"
-        element={
-          !login ? (
-            <Login />
-          ) : isAdmin ? (
-            <Navigate to="/admin/dashboard" />
-          ) : (
-            <Navigate to="/employee/dashboard" />
-          )
-        }
-      />
+  {/* Login */}
+  <Route
+    path="/login"
+    element={
+      !login ? (
+        <Login />
+      ) : isAdmin ? (
+        <Navigate to="/admin/dashboard" />
+      ) : (
+        <Navigate to="/employee/dashboard" />
+      )
+    }
+  />
 
-      {/* ADMIN (LAYOUT + NESTED ROUTES) */}
-      <Route
-        path="/admin"
-        element={
-          login && isAdmin ? (
-            <AdminDashboard loggedEmail={loggedEmail} />
-          ) : (
-            <Navigate to="/login" />
-          )
-        }
-      >
-        <Route index element={<Dashboard />} />
-        <Route path="dashboard" element={<Dashboard />} />
-        <Route path="create-task" element={<CreateTask />} />
-        <Route path="add-employee" element={<AddEmployee />} />
-        <Route path="show-task" element={<ShowTask />} />
-        <Route path="show-employee" element={<ShowEmployee />} />
-      </Route>
+  {/* ADMIN */}
+  <Route
+    path="/admin"
+    element={
+      login && isAdmin ? (
+        <AdminDashboard loggedEmail={loggedEmail} />
+      ) : (
+        <Navigate to="/login" />
+      )
+    }
+  >
+    <Route index element={<Dashboard />} />
+    <Route path="dashboard" element={<Dashboard />} />
+    <Route path="create-task" element={<CreateTask />} />
+    <Route path="add-employee" element={<AddEmployee />} />
+    <Route path="show-task" element={<ShowTask />} />
+    <Route path="show-employee" element={<ShowEmployee />} />
+  </Route>
 
-      {/* EMPLOYEE */}
-      <Route
-        path="/employee/dashboard"
-        element={
-          login && !isAdmin ? (
-            <EmployeeDashboard loggedEmail={loggedEmail} />
-          ) : (
-            <Navigate to="/login" />
-          )
-        }
-      />
-    </Routes>
+  {/* EMPLOYEE */}
+  <Route
+    path="/employee/dashboard"
+    element={
+      login && !isAdmin ? (
+        <EmployeeDashboard loggedEmail={loggedEmail} />
+      ) : (
+        <Navigate to="/login" />
+      )
+    }
+  />
+
+  {/* 🔥 FALLBACK (VERY IMPORTANT FOR GITHUB PAGES) */}
+  <Route path="*" element={<Navigate to="/login" replace />} />
+</Routes>
+
   );
 };
 

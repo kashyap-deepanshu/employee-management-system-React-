@@ -7,7 +7,7 @@ const CreateTask = () => {
     const [taskCategory, setTaskCategory] = useState("");
     const [taskAssignTo, setTaskAssignTo] = useState("");
     const [taskDescription, setTaskDescription] = useState("");
-    const {authData, setAuthData } = useContext(AuthContext); 
+    const {authData, setAuthData ,taskIdCount,setTaskIdCount} = useContext(AuthContext); 
 
     const today = new Date().toISOString().split("T")[0];
 
@@ -21,13 +21,15 @@ const CreateTask = () => {
     const createTaskSubmitHandler = (e) => {
         e.preventDefault();
         const addedNewTask = {
+            taskId:taskIdCount,
             active: false,
             newTask: true,
             completed: false,
             failed: false,
             taskTitle: taskTitle,
             taskDescription: taskDescription,
-            taskDate: taskDueDate,
+            taskDate:today,
+            taskDueDate: taskDueDate,
             category: taskCategory,
         };
         const index = authData.employees.findIndex(
@@ -53,6 +55,7 @@ const CreateTask = () => {
         setTaskDescription("");
         setTaskDueDate("");
         setTaskTitle("");
+        setTaskIdCount(taskIdCount+1);
     };
 
     return (

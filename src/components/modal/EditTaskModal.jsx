@@ -1,94 +1,100 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/AuthProvider";
 
-const EditTaskModal = ({ task, closeTaskModal }) => {
 
-  const authContext = useContext(AuthContext)
-  const { authData, setAuthData } = authContext
+const formatDateForInput = (date) => {
+  if (!date) return "";
+  return new Date(date).toISOString().split("T")[0];
+};
+
+const EditTaskModal = ({ task, closeTaskModal }) => {
+  const authContext = useContext(AuthContext);
+  const { authData, setAuthData } = authContext;
+
   const today = new Date().toISOString().split("T")[0];
 
   const [taskFormData, setTaskFormData] = useState({
-    taskId: undefined,
-    newTask: "",
-    taskTitle: " ",
-    taskDescription: "  ",
-    // employeeName:"",  
+    taskId: "",
+    newTask: false,
+    taskTitle: "",
+    taskDescription: "",
     taskDate: "",
     taskDueDate: "",
     category: "",
   });
-  // console.log(task);
-
 
   useEffect(() => {
     if (task) {
       setTaskFormData({
-        taskId: task.taskId,
+        taskId: task.taskId || "",
         newTask: true,
-        taskTitle: task.taskTitle,
-        taskDescription: task.taskDescription,
-        // employeeName:task.employeeName,
-        taskDate: task.taskDate,
-        taskDueDate: task.taskDueDate,
-        category: task.category,
-      })
+        taskTitle: task.taskTitle || "",
+        taskDescription: task.taskDescription || "",
+        taskDate: formatDateForInput(task.taskDate),
+        taskDueDate: formatDateForInput(task.taskDueDate),
+        category: task.category || "",
+      });
     }
-  }, [task])
-
+  }, [task]);
 
   const handleTaskChange = (e) => {
-    setTaskFormData({ ...taskFormData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setTaskFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
-
+  // 🔹 Update task
   const submitTaskChangeHandler = () => {
-  const updatedEmployees = authData.employees.map((emp) => {
-    const fullName = `${emp.firstName} ${emp.lastName}`.toLowerCase();
+    const updatedEmployees = authData.employees.map((emp) => {
+      const fullName = `${emp.firstName} ${emp.lastName}`.toLowerCase();
 
-    if (fullName !== task.employeeName.toLowerCase()) {
-      return emp; // skip other employees
-    }
+      if (fullName !== task.employeeName.toLowerCase()) {
+        return emp;
+      }
 
-    return {
-      ...emp,
-      tasks: emp.tasks.map((t) =>
-        t.taskId === taskFormData.taskId
-          ? { ...t, ...taskFormData }
-          : t
-      ),
-    };
-  });
+      return {
+        ...emp,
+        tasks: emp.tasks.map((t) =>
+          t.taskId === taskFormData.taskId
+            ? { ...t, ...taskFormData }
+            : t
+        ),
+      };
+    });
 
-  localStorage.setItem("employees", JSON.stringify(updatedEmployees));
-  setAuthData({ ...authData, employees: updatedEmployees });
-  closeTaskModal();
-};
+    localStorage.setItem("employees", JSON.stringify(updatedEmployees));
+    setAuthData({ ...authData, employees: updatedEmployees });
+    closeTaskModal();
+  };
 
+  // 🔹 Delete task
   const deleteTaskHandler = () => {
-   const updatedEmployees = authData.employees.map((emp) => {
-    const fullName = `${emp.firstName} ${emp.lastName}`.toLowerCase();
+    const updatedEmployees = authData.employees.map((emp) => {
+      const fullName = `${emp.firstName} ${emp.lastName}`.toLowerCase();
 
-    if (fullName !== task.employeeName.toLowerCase()) {
-      return emp; // skip other employees
-    }
+      if (fullName !== task.employeeName.toLowerCase()) {
+        return emp;
+      }
 
-    return {
-      ...emp,
-      tasks: emp.tasks.filter((t) =>
-        t.taskId !== taskFormData.taskId         
-      ),
-    };
-  });
+      return {
+        ...emp,
+        tasks: emp.tasks.filter(
+          (t) => t.taskId !== taskFormData.taskId
+        ),
+      };
+    });
 
-  localStorage.setItem("employees", JSON.stringify(updatedEmployees));
-  setAuthData({ ...authData, employees: updatedEmployees });
-  closeTaskModal();
-  }
+    localStorage.setItem("employees", JSON.stringify(updatedEmployees));
+    setAuthData({ ...authData, employees: updatedEmployees });
+    closeTaskModal();
+  };
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
       <div className="bg-white w-105 rounded-xl p-6 relative">
-
+        {/* Close Button */}
         <button
           onClick={closeTaskModal}
           className="absolute top-3 right-3 text-gray-500 text-xl"
@@ -100,65 +106,65 @@ const EditTaskModal = ({ task, closeTaskModal }) => {
 
         <div className="space-y-3">
           <input
-            name="taskId"
-            value={`Task Id:-${taskFormData.taskId}`}
-            className="w-full border p-2 rounded"
+            value={`Task Id :- ${taskFormData.taskId}`}
+            className="w-full border p-2 rounded bg-gray-50"
             readOnly
           />
-          <input onChange={handleTaskChange}
+
+          <input
             name="taskTitle"
-            value={`${taskFormData.taskTitle}`}
+            value={taskFormData.taskTitle}
+            onChange={handleTaskChange}
             placeholder="Task Title"
             className="w-full border p-2 rounded"
           />
-          <input onChange={handleTaskChange}
+
+          <input
             name="taskDescription"
-            value={`${taskFormData.taskDescription}`}
+            value={taskFormData.taskDescription}
+            onChange={handleTaskChange}
             placeholder="Task Description"
             className="w-full border p-2 rounded"
-
           />
-          {/* <input onChange={handleTaskChange}
-            name="employeeName"
-            value={`${taskFormData.employeeName}`}
-            placeholder="Assign To"
-            className="w-full border p-2 rounded"
-            
-          /> */}
+
           <input
             name="taskDate"
-            value={`${taskFormData.taskDate}`}
-            placeholder="Task Date"
-            className="w-full border p-2 rounded"
+            value={taskFormData.taskDate || ""}
             readOnly
+            className="w-full border p-2 rounded bg-gray-50"
           />
-          <input onChange={handleTaskChange}
+
+          <input
             type="date"
             min={today}
             name="taskDueDate"
-            value={`${taskFormData.taskDueDate}`}
-            placeholder="Task Due Date"
+            value={taskFormData.taskDueDate || ""}
+            onChange={handleTaskChange}
             className="w-full border p-2 rounded"
-
           />
-          <label>Category:-</label>
-          <input onChange={handleTaskChange}
+
+          <label className="text-sm font-medium">Category</label>
+          <input
             name="category"
-            value={`${taskFormData.category}`}
+            value={taskFormData.category}
+            onChange={handleTaskChange}
             placeholder="Task Category"
             className="w-full border p-2 rounded"
           />
-
-
         </div>
 
-        <button onClick={submitTaskChangeHandler}
-          className="mt-5 w-full bg-blue-600 text-white py-2 rounded active:scale-98 transition">
+        <button
+          onClick={submitTaskChangeHandler}
+          className="mt-5 w-full bg-blue-600 text-white py-2 rounded active:scale-95 transition"
+        >
           Save Changes
         </button>
-        <button onClick={deleteTaskHandler}
-          className="mt-1 w-full bg-red-500 text-white py-2 rounded active:scale-98 transition">
-          Delete task
+
+        <button
+          onClick={deleteTaskHandler}
+          className="mt-2 w-full bg-red-500 text-white py-2 rounded active:scale-95 transition"
+        >
+          Delete Task
         </button>
       </div>
     </div>
@@ -166,5 +172,3 @@ const EditTaskModal = ({ task, closeTaskModal }) => {
 };
 
 export default EditTaskModal;
-
-

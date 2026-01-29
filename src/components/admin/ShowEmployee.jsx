@@ -30,10 +30,11 @@ const ShowEmployee = () => {
 
   return (
 
-    <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+<div className="bg-white rounded-xl border border-gray-200 shadow-sm h-full overflow-hidden">
 
       {/* Table Header */}
       <div className="px-6 py-4 border-b flex justify-between items-center">
+
         <h2 className="text-lg font-semibold text-gray-800">
           Employees
         </h2>
@@ -48,8 +49,10 @@ const ShowEmployee = () => {
       </div>
 
       {/* Table */}
+       <div className="overflow-y-auto h-full">
       <table className="w-full text-sm text-left">
-        <thead className="bg-gray-50 text-gray-600 uppercase text-xs">
+       <thead className="bg-gray-50 text-gray-600 uppercase text-xs sticky top-0">
+
           <tr>
             <th className="px-6 py-3">Employee</th>
             <th className="px-6 py-3">Department</th>
@@ -165,6 +168,7 @@ const ShowEmployee = () => {
           )}
         </tbody>
       </table>
+      </div>
 
       {isEditOpen && (
         <EditEmployeeModal
