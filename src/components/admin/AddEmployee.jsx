@@ -66,7 +66,7 @@ const AddEmployee = () => {
 };
 
     return (
-        <div className="flex justify-center p-10">
+        <div className="flex justify-center  md:p-10">
             <form
                 onSubmit={(e) => {
                     empSubmitHandler(e);
@@ -74,7 +74,7 @@ const AddEmployee = () => {
                 className="w-full max-w-5xl  bg-white rounded-2xl shadow-2xl p-10"
             >
                 {/* FORM TITLE (Above both sections) */}
-                <h2 className="text-3xl font-semibold text-gray-800 mb-8">
+                <h2 className="md:text-3xl text-xl font-semibold text-gray-800 mb-8">
                     Add New Employee
                 </h2>
 
@@ -84,7 +84,7 @@ const AddEmployee = () => {
                     <div className="space-y-6">
                         {/* Employee's first name */}
                         <div>
-                            <label className="block text-gray-600 mb-1">First Name</label>
+                            <label className=" text-sm md:text-base  block text-gray-600 mb-1">First Name</label>
                             <input
                             required
                                 onChange={(e) => {
@@ -93,13 +93,13 @@ const AddEmployee = () => {
                                 value={firstName}
                                 type="text"
                                 placeholder="Employee First Name"
-                                className="w-full px-4 py-2 rounded-lg border border-gray-300
+                                className="w-full px-4 py-2 rounded-lg border border-gray-300 text-sm md:text-base 
                                 focus:outline-none focus:ring-2 focus:ring-emerald-500"
                             />
                         </div>
                         {/* Employee's last name */}
                         <div>
-                            <label className="block text-gray-600 mb-1">Last Name</label>
+                            <label className=" text-sm md:text-base  block text-gray-600 mb-1">Last Name</label>
                             <input 
                                 onChange={(e) => {
                                     setLastName(e.target.value);
@@ -107,14 +107,14 @@ const AddEmployee = () => {
                                 value={lastName}
                                 type="text"
                                 placeholder="Employee Last Name"
-                                className="w-full px-4 py-2 rounded-lg border border-gray-300
+                                className="w-full px-4 py-2 rounded-lg border border-gray-300 text-sm md:text-base 
                                 focus:outline-none focus:ring-2 focus:ring-emerald-500"
                             />
                         </div>
 
                         {/* Date of join */}
                         <div>
-                            <label className="block text-gray-600 mb-1">
+                            <label className=" text-sm md:text-base  block text-gray-600 mb-1">
                                 Date Of Joining
                             </label>
                             <input required
@@ -123,7 +123,7 @@ const AddEmployee = () => {
                                 }}
                                 value={joinDate}
                                 type="date"
-                                className="w-full px-4 py-2 rounded-lg
+                                className="w-full px-4 py-2 rounded-lg text-sm md:text-base 
                                 border border-gray-300
                                 focus:outline-none focus:ring-2 focus:ring-emerald-500"
                             />
@@ -131,7 +131,7 @@ const AddEmployee = () => {
 
                         {/* Address */}
                         <div>
-                            <label className="block text-gray-600 mb-1">Address</label>
+                            <label className=" text-sm md:text-base  block text-gray-600 mb-1">Address</label>
                             <textarea required
                                 onChange={(e) => {
                                     setAddress(e.target.value);
@@ -139,7 +139,7 @@ const AddEmployee = () => {
                                 value={address}
                                 rows="3"
                                 placeholder="Employee's Address"
-                                className="w-full px-4 py-3 rounded-lg
+                                className="w-full px-4 py-3 rounded-lg text-sm md:text-base 
                              border border-gray-300 resize-none
                              focus:outline-none focus:ring-2 focus:ring-emerald-500"
                             ></textarea>
@@ -147,17 +147,17 @@ const AddEmployee = () => {
                     </div>
 
                     {/* RIGHT SECTION */}
-                    <div className="flex flex-col justify-between">
+                    <div className="flex flex-col justify-between ">
                         {/* Department */}
                         <div>
-                            <label className="block text-gray-600 mb-1">Department</label>
+                            <label className=" text-sm md:text-base  block text-gray-600 mb-1">Department</label>
                             <select required
                                 onChange={(e) => {
                                     setDeptName(e.target.value);
                                 }}
                                 value={deptName}
-                                className="w-full px-4 py-2 rounded-lg
-                             border border-gray-300
+                                className="w-full px-4 py-2 rounded-lg text-sm md:text-base 
+                             border border-gray-300 mb-5
                              focus:outline-none focus:ring-2 focus:ring-emerald-500"
                             >
                                 {" "}
@@ -173,13 +173,13 @@ const AddEmployee = () => {
 
                         {/* Designation */}
                         <div>
-                            <label className="block text-gray-600 mb-1">Designation</label>
+                            <label className=" text-sm md:text-base  block text-gray-600 mb-1">Designation</label>
                             <select required
                                 onChange={(e) => {
                                     setDesignation(e.target.value);
                                 }}
                                 value={designation}
-                                className="w-full px-4 py-2 rounded-lg border border-gray-300
+                                className="w-full px-4 py-2 rounded-lg border border-gray-300 text-sm mb-5 md:text-base 
                              focus:outline-none focus:ring-2 focus:ring-emerald-500"
                             >
                                 {" "}
@@ -197,7 +197,7 @@ const AddEmployee = () => {
 
                         {/* Employement Type*/}
                         <div>
-                            <label className="block text-gray-600 mb-1">
+                            <label className=" text-sm md:text-base  block text-gray-600 mb-1">
                                 Employement Type
                             </label>
                             <select required
@@ -205,7 +205,7 @@ const AddEmployee = () => {
                                     setEmpType(e.target.value);
                                 }}
                                 value={empType}
-                                className="w-full px-4 py-2 rounded-lg border border-gray-300
+                                className="w-full px-4 py-2 rounded-lg border border-gray-300 text-sm md:text-base mb-5
                                 focus:outline-none focus:ring-2 focus:ring-emerald-500"
                             >
                                 {" "}
@@ -217,13 +217,13 @@ const AddEmployee = () => {
 
                         {/* Status*/}
                         <div>
-                            <label className="block text-gray-600 mb-1">Status</label>
+                            <label className=" text-sm md:text-base  block text-gray-600 mb-1">Status</label>
                             <select required
                                 onChange={(e) => {
                                     setEmpStatus(e.target.value);
                                 }}
                                 value={empStatus}
-                                className="w-full px-4 py-2 rounded-lg border border-gray-300
+                                className="w-full px-4 py-2 rounded-lg border border-gray-300 text-sm md:text-base mb-5
                                 focus:outline-none focus:ring-2 focus:ring-emerald-500"
                             >
                                 <option value=""></option>
@@ -236,7 +236,7 @@ const AddEmployee = () => {
                         <div className="text-right mt-8">
                             <button
                                 type="submit"
-                                className="bg-emerald-600 text-white font-semibold px-8 py-3 rounded-lg active:scale-98                        hover:bg-emerald-700 transition"
+                                className="bg-emerald-600 text-white font-semibold md:px-8 md:py-4 px-4 py-2 text-sm md:text-base  rounded-lg active:scale-98                        hover:bg-emerald-700 transition"
                             >
                                 Add Employee
                             </button>

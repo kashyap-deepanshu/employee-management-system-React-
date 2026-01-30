@@ -64,7 +64,7 @@ const CreateTask = () => {
     };
 
     return (
-        <div className="flex justify-center p-10">
+        <div className="flex justify-center md:p-10">
             <form
                 onSubmit={(e) => {
                     createTaskSubmitHandler(e);
@@ -72,7 +72,7 @@ const CreateTask = () => {
                 className="w-full max-w-5xl bg-white rounded-2xl shadow-2xl p-10"
             >
                 {/* FORM TITLE (Above both sections) */}
-                <h2 className="text-3xl font-semibold text-gray-800 mb-8">
+                <h2 className="md:text-3xl text-xl font-semibold text-gray-800 mb-8">
                     Create New Task
                 </h2>
 
@@ -82,15 +82,15 @@ const CreateTask = () => {
                     <div className="space-y-6">
                         {/* Task Title */}
                         <div>
-                            <label className="block text-gray-600 mb-1">Task Title</label>
-                            <input
+                            <label className="block text-gray-600 mb-1 text-sm md:text-base ">Task Title</label>
+                            <input required
                                 onChange={(e) => {
                                     setTaskTitle(e.target.value);
                                 }}
                                 value={taskTitle}
                                 type="text"
                                 placeholder="Make a UI design"
-                                className="w-full px-4 py-2 rounded-lg
+                                className="w-full px-4 py-2 rounded-lg text-sm md:text-base
                                 border border-gray-300
                                 focus:outline-none focus:ring-2 focus:ring-emerald-500"
                             />
@@ -98,15 +98,15 @@ const CreateTask = () => {
 
                         {/* Due Date */}
                         <div>
-                            <label className="block text-gray-600 mb-1">Due Date</label>
-                            <input
+                            <label className="block text-gray-600 text-sm md:text-base mb-1">Due Date</label>
+                            <input required
                                 value={taskDueDate}
                                 min={today}
                                 onChange={(e) => {
                                     setTaskDueDate(e.target.value);
                                 }}
                                 type="date"
-                                className="w-full px-4 py-2 rounded-lg
+                                className="w-full px-4 py-2 rounded-lg text-sm md:text-base
                              border border-gray-300
                              focus:outline-none focus:ring-2 focus:ring-emerald-500"
                             /> 
@@ -114,15 +114,15 @@ const CreateTask = () => {
 
                         {/* Assign To */}
                         <div>
-                            <label className="block text-gray-600 mb-1">Assign To</label>
-                            <select
+                            <label className="block text-gray-600 text-sm md:text-base mb-1">Assign To</label>
+                            <select required
                                 onChange={(e) => {
                                     setTaskAssignTo(e.target.value);
                                 }}
                                 value={taskAssignTo}
                                 type="text"
                                 // placeholder="Employee Name"
-                                className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                                className="w-full px-4 py-2 rounded-lg text-sm md:text-base border border-gray-300 focus:outline-none focus:ring-2 focus:ring-emerald-500"
                             >
                                 <option value="" hidden disabled>Select Employee</option>
                                 {empName.map((emp, idx) => {
@@ -134,13 +134,13 @@ const CreateTask = () => {
 
                         {/* Category */}
                         <div>
-                            <label className="block text-gray-600 mb-1">Category</label>
-                            <select
+                            <label className="block text-gray-600 text-sm md:text-base mb-1">Category</label>
+                            <select required
                                 value={taskCategory}
                                 onChange={(e) => {
                                     setTaskCategory(e.target.value);
                                 }}
-                                className="w-full px-4 py-2 rounded-lg
+                                className="w-full px-4 py-2 rounded-lg text-sm md:text-base
                              border border-gray-300
                              focus:outline-none focus:ring-2 focus:ring-emerald-500"
                             >
@@ -158,15 +158,15 @@ const CreateTask = () => {
                     <div className="flex flex-col justify-between">
                         {/* Description */}
                         <div>
-                            <label className="block text-gray-600 mb-1">Description</label>
-                            <textarea
+                            <label className="block text-gray-600 text-sm md:text-base mb-1">Description</label>
+                            <textarea required
                                 onChange={(e) => {
                                     setTaskDescription(e.target.value);
                                 }}
                                 value={taskDescription}
                                 rows="9"
                                 placeholder="Describe the task in detail..."
-                                className="w-full px-4 py-3 rounded-lg
+                                className="w-full px-4 py-3 rounded-lg text-sm md:text-base
                              border border-gray-300 resize-none
                              focus:outline-none focus:ring-2 focus:ring-emerald-500"
                             ></textarea>
@@ -176,7 +176,7 @@ const CreateTask = () => {
                         <div className="text-right mt-8">
                             <button
                                 type="submit"
-                                className="bg-emerald-600 text-white font-semibold px-8 py-3 rounded-lg active:scale-98                        hover:bg-emerald-700 transition"
+                                className="bg-emerald-600 text-sm md:text-base text-white font-semibold px-8 py-3 rounded-lg active:scale-98                        hover:bg-emerald-700 transition"
                             >
                                 Create Task
                             </button>

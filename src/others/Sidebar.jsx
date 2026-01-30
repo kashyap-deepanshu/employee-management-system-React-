@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 
 const Sidebar = ({ expanded, onItemClick }) => {
   const base =
-    "py-4 px-6 w-full text-lg transition hover:bg-emerald-100 hover:text-emerald-950";
+    "py-4 px-6 w-full md:text-lg text-sm transition hover:bg-emerald-100 hover:text-emerald-950";
 
   const active = "bg-emerald-100 text-black";
   const inactive = "text-white";
@@ -12,7 +12,7 @@ const Sidebar = ({ expanded, onItemClick }) => {
       className={`
         h-full bg-emerald-950 border-r border-emerald-800
         transition-all duration-300
-        ${expanded ? "w-[240px]" : "w-[20px]"}
+        ${expanded ? "md:w-60 w-40" : "w-5"}
         overflow-hidden
         flex flex-col
       `}

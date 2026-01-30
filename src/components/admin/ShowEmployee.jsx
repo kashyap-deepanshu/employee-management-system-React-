@@ -35,7 +35,7 @@ const ShowEmployee = () => {
       {/* Table Header */}
       <div className="px-6 py-4 border-b flex justify-between items-center">
 
-        <h2 className="text-lg font-semibold text-gray-800">
+        <h2 className="text-lg font-semibold text-gray-800 sm:text-m  md:text-xl ">
           Employees:- {finalSearch.length}
         </h2>
         <input onChange={(e) => {
@@ -44,24 +44,24 @@ const ShowEmployee = () => {
           type="text"
           value={searchEmployee}
           placeholder="Search employee..."
-          className="border rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="border rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 w-25 md:w-50" 
         />
       </div>
 
       {/* Table */}
  <div className="overflow-y-auto max-h-[calc(100vh-220px)] no-scrollbar">        
-      <table className="w-full text-sm text-left">
+      <table className="w-full sm:text-sm text-xs text-left">
        <thead className="bg-gray-50 text-gray-600 uppercase text-xs sticky top-0">
 
           <tr>
-            <th className="px-6 py-3">S.No</th>
-            <th className="px-6 py-3">Employee</th>
-            <th className="px-6 py-3">Department</th>
-            <th className="px-6 py-3">Designation</th>
-            <th className="px-6 py-3">Type</th>
-            <th className="px-6 py-3">Joined</th>
-            <th className="px-6 py-3">Status</th>
-            <th className="px-6 py-3 text-right">Actions</th>
+            <th className="md:px-6 md:py-4 px-3 py-2">S.No</th>
+            <th className="md:px-6 md:py-4 px-3 py-2">Employee</th>
+            <th className="md:px-6 md:py-4 px-3 py-2">Department</th>
+            <th className="md:px-6 md:py-4 px-3 py-2">Designation</th>
+            <th className="md:px-6 md:py-4 px-3 py-2">Type</th>
+            <th className="md:px-6 md:py-4 px-3 py-2">Joined</th>
+            <th className="md:px-6 md:py-4 px-3 py-2">Status</th>
+            <th className="md:px-6 md:py-4 px-3 py-2 text-right">Actions</th>
           </tr>
         </thead>
 
@@ -70,11 +70,11 @@ const ShowEmployee = () => {
             return <React.Fragment key={index}>
               <tr className="hover:bg-gray-50 transition" >
                 {/* Name + Email */}
-                <td className="px-6 py-4">
+                <td className="md:px-6 md:py-4 px-3 py-2">
                   {index+1}
                 </td>
 
-                <td className="px-6 py-4">
+                <td className="md:px-6 md:py-4 px-3 py-2">
                   <div className="flex items-center gap-3">
                     <div className="w-9 h-9 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-semibold">
                       {emp.firstName[0]}
@@ -90,26 +90,26 @@ const ShowEmployee = () => {
                   </div>
                 </td>
 
-                <td className="px-6 py-4">
+                <td className="md:px-6 md:py-4 px-3 py-2">
                   {emp.department}
                 </td>
 
-                <td className="px-6 py-4">
+                <td className="md:px-6 md:py-4 px-3 py-2">
                   {emp.designation}
                 </td>
 
-                <td className="px-6 py-4">
+                <td className="md:px-6 md:py-4 px-3 py-2">
                   <span className="px-2 py-1 rounded-md text-xs bg-gray-100">
                     {emp.employmentType}
                   </span>
                 </td>
 
-                <td className="px-6 py-4">
+                <td className="md:px-6 md:py-4 px-3 py-2">
                   {emp.dateOfJoining}
                 </td>
 
                 {/* Status */}
-                <td className="px-6 py-4">
+                <td className="md:px-6 md:py-4 px-3 py-2">
                   <span
                     className={`px-3 py-1 rounded-full text-xs font-medium ${emp.status === "Active"
                       ? "bg-green-100 text-green-700"
@@ -121,7 +121,7 @@ const ShowEmployee = () => {
                 </td>
 
                 {/* Actions */}
-                <td className="px-6 py-4 text-right">
+                <td className="md:px-6 md:py-4 px-3 py-2 text-right">
                   <button
                     onClick={() =>
                       setExpandedEmployeeIndex(
@@ -144,8 +144,8 @@ const ShowEmployee = () => {
               {expandedEmployeeIndex === index && (
 
                 <tr className=" col-span-2 " key={`${index}-details`}>
-                  <td colSpan="6" className="px-6 py-4">
-                    <div className="text-sm text-gray-700  ">
+                  <td colSpan="6" className="md:px-6 md:py-4 px-3 py-2">
+                    <div className="md:text-sm text-xs text-gray-700  ">
                       <p><b>Name:</b> {`${emp.firstName} ${emp.lastName}`}</p>
                       <p><b>Address:</b> {emp.address}</p>
                       <p><b>Assigned Tasks</b></p>

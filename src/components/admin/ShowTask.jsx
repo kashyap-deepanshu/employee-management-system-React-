@@ -57,7 +57,7 @@ export default function ShowTask() {
 
       {/* Header */}
       <div className="px-6 py-4 border-b flex justify-between items-center  ">
-        <h2 className="text-lg font-semibold text-gray-800">
+        <h2 className=" font-semibold text-gray-800 sm:text-m  md:text-xl ">
           Tasks:- {finalTasks.length}
         </h2>
 
@@ -67,29 +67,29 @@ export default function ShowTask() {
           type="text"
           value={searchText}
           placeholder="Search task..."
-          className="px-3 py-2 text-sm border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+          className="px-3 py-2 text-sm border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none w-25 md:w-50"
         />
       </div>
 
       {/* Table */}
  <div className="overflow-y-auto max-h-[calc(100vh-220px)] no-scrollbar">        
-    <table className="w-full text-sm">
+    <table className="w-full  sm:text-sm text-xs">
           <thead className="bg-gray-50 text-gray-600 uppercase  text-xs sticky top-0 ">
             <tr>
-              <th className="px-6 py-5 text-left">S.No</th>
-              <th className="px-6 py-5 text-left">Task</th>
-              <th className="px-6 py-5">Category</th>
-              <th className="px-6 py-5">Created Date</th>
+              <th className="md:px-6 md:py-5 px-3 py-2 text-left">S.No</th>
+              <th className="md:px-6 md:py-5 px-3 py-2 text-left">Task</th>
+              <th className="md:px-6 md:py-5 px-3 py-2">Category</th>
+              <th className="md:px-6 md:py-5 px-3 py-2">Created Date</th>
               <th onClick={() => {
                 isDueDateSort ? setIsDueDateSort(false) : setIsDueDateSort(true)
                 console.log("hello");
 
               }
               }
-                className="flex justify-center items-center px-6 py-5">Due Date<ArrowUpDown className={` mx-2 p-2 ${isDueDateSort ? "bg-blue-100 rounded-xl" : ''}`} size={30} /></th>
+                className="flex justify-center items-center md:px-6 md:py-5 px-3 py-2">Due Date<ArrowUpDown className={` mx-2 p-2 ${isDueDateSort ? "bg-blue-100 rounded-xl" : ''}`} size={30} /></th>
 
-              <th className="px-6 py-5">Status</th>
-              <th className="px-6 py-5 text-right">Action</th>
+              <th className="md:px-6 md:py-5 px-3 py-2">Status</th>
+              <th className="md:px-6 md:py-5 px-3 py-2 text-right">Action</th>
             </tr>
           </thead>
 
@@ -100,18 +100,18 @@ export default function ShowTask() {
               return (
                 <React.Fragment key={`${task.taskTitle}-${index}`}>
                   <tr key={index} className="hover:bg-gray-50">
-                                        <td className="px-6 py-4 text-center">{index+1}</td>
+                    <td className="md:px-6 md:py-5 px-3 py-2 text-center">{index+1}</td>
 
-                    <td className="px-6 py-4">
+                    <td className="md:px-6 md:py-5 px-3 py-2">
                       <p className="font-medium text-gray-800">{task.taskTitle}</p>
                       <p className="text-xs text-gray-500">{task.taskDescription}</p>
                     </td>
 
-                    <td className="px-6 py-4 text-center">{task.category}</td>
-                    <td className="px-6 py-4 text-center">{task.taskDate}</td>
-                    <td className="px-6 py-4 text-center">{task.taskDueDate}</td>
+                    <td className="md:px-6 md:py-5 px-3 py-2 text-center">{task.category}</td>
+                    <td className="md:px-6 md:py-5 px-3 py-2 text-center">{task.taskDate}</td>
+                    <td className="md:px-6 md:py-5 px-3 py-2 text-center">{task.taskDueDate}</td>
 
-                    <td className="px-6 py-4 text-center">
+                    <td className="md:px-6 md:py-5 px-3 py-2 text-center">
                       <span
                         className={`px-3 py-1 rounded-full text-xs font-medium ${status.style}`}
                       >
@@ -119,7 +119,7 @@ export default function ShowTask() {
                       </span>
                     </td>
 
-                    <td className="px-6 py-4 text-right">
+                    <td className="md:px-6 md:py-5 px-3 py-2 text-right">
                       <button
                         onClick={() =>
                           setExpandedTaskIndex(
