@@ -36,7 +36,7 @@ const ShowEmployee = () => {
       <div className="px-6 py-4 border-b flex justify-between items-center">
 
         <h2 className="text-lg font-semibold text-gray-800">
-          Employees
+          Employees:- {finalSearch.length}
         </h2>
         <input onChange={(e) => {
           setSearchEmployee(e.target.value)
@@ -49,11 +49,12 @@ const ShowEmployee = () => {
       </div>
 
       {/* Table */}
-       <div className="overflow-y-auto h-full">
+ <div className="overflow-y-auto max-h-[calc(100vh-220px)] no-scrollbar">        
       <table className="w-full text-sm text-left">
        <thead className="bg-gray-50 text-gray-600 uppercase text-xs sticky top-0">
 
           <tr>
+            <th className="px-6 py-3">S.No</th>
             <th className="px-6 py-3">Employee</th>
             <th className="px-6 py-3">Department</th>
             <th className="px-6 py-3">Designation</th>
@@ -69,6 +70,10 @@ const ShowEmployee = () => {
             return <React.Fragment key={index}>
               <tr className="hover:bg-gray-50 transition" >
                 {/* Name + Email */}
+                <td className="px-6 py-4">
+                  {index+1}
+                </td>
+
                 <td className="px-6 py-4">
                   <div className="flex items-center gap-3">
                     <div className="w-9 h-9 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-semibold">

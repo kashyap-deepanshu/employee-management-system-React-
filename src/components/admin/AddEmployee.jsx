@@ -18,6 +18,11 @@ const AddEmployee = () => {
 
     // console.log(authData.employees[0])
     // console.log(employees);
+    function capitalizeWord(str) {
+  if (!str) return str;
+  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+}
+
 
     const empSubmitHandler = (e) => {
   e.preventDefault();
@@ -25,9 +30,9 @@ const AddEmployee = () => {
   const newEmployee = {
     id: empIdCount,
     role: "employee",
-    firstName,
-    lastName,
-    email: firstName + "@e.com",
+    firstName:capitalizeWord(firstName),
+    lastName:capitalizeWord(lastName),
+    email: firstName.toLowerCase()+lastName.toLowerCase() + "@e.com",
     password: "123",
     address,
     dateOfJoining: joinDate,
@@ -81,6 +86,7 @@ const AddEmployee = () => {
                         <div>
                             <label className="block text-gray-600 mb-1">First Name</label>
                             <input
+                            required
                                 onChange={(e) => {
                                     setFirstName(e.target.value);
                                 }}
@@ -94,7 +100,7 @@ const AddEmployee = () => {
                         {/* Employee's last name */}
                         <div>
                             <label className="block text-gray-600 mb-1">Last Name</label>
-                            <input
+                            <input 
                                 onChange={(e) => {
                                     setLastName(e.target.value);
                                 }}
@@ -111,7 +117,7 @@ const AddEmployee = () => {
                             <label className="block text-gray-600 mb-1">
                                 Date Of Joining
                             </label>
-                            <input
+                            <input required
                                 onChange={(e) => {
                                     setJoinDate(e.target.value);
                                 }}
@@ -126,7 +132,7 @@ const AddEmployee = () => {
                         {/* Address */}
                         <div>
                             <label className="block text-gray-600 mb-1">Address</label>
-                            <textarea
+                            <textarea required
                                 onChange={(e) => {
                                     setAddress(e.target.value);
                                 }}
@@ -145,7 +151,7 @@ const AddEmployee = () => {
                         {/* Department */}
                         <div>
                             <label className="block text-gray-600 mb-1">Department</label>
-                            <select
+                            <select required
                                 onChange={(e) => {
                                     setDeptName(e.target.value);
                                 }}
@@ -158,17 +164,17 @@ const AddEmployee = () => {
                                 <option className="block text-gray-600 mb-1" value="">
                                     Select Department
                                 </option>
-                                <option value="hr">Human Resource</option>
-                                <option value="devlopment">Development</option>
-                                <option value="testing">Testing</option>
-                                <option value="sales&Marketing">Sales & Marketing</option>
+                                <option value="HR">Human Resource</option>
+                                <option value="Devlopment">Development</option>
+                                <option value="Testing">Testing</option>
+                                <option value="Sales & Marketing">Sales & Marketing</option>
                             </select>
                         </div>
 
                         {/* Designation */}
                         <div>
                             <label className="block text-gray-600 mb-1">Designation</label>
-                            <select
+                            <select required
                                 onChange={(e) => {
                                     setDesignation(e.target.value);
                                 }}
@@ -180,12 +186,12 @@ const AddEmployee = () => {
                                 <option value="" className=" text-gray-600 ">
                                     Select Designation
                                 </option>
-                                <option value="developer">Software Engineer / Developer</option>
-                                <option value="projectManager">Project Manager</option>
-                                <option value="salesExecutive">Sales Executive</option>
-                                <option value="projectManager">Project Manager</option>
-                                <option value="hrExecutive">HR Executive</option>
-                                <option value="hrManager">HR Manager</option>
+                                <option value="Developer">Software Engineer / Developer</option>
+                                <option value="Project Manager">Project Manager</option>
+                                <option value="Sales Executive">Sales Executive</option>
+                                <option value="Project Manager">Project Manager</option>
+                                <option value="HR Executive">HR Executive</option>
+                                <option value="HR Manager">HR Manager</option>
                             </select>
                         </div>
 
@@ -194,7 +200,7 @@ const AddEmployee = () => {
                             <label className="block text-gray-600 mb-1">
                                 Employement Type
                             </label>
-                            <select
+                            <select required
                                 onChange={(e) => {
                                     setEmpType(e.target.value);
                                 }}
@@ -204,15 +210,15 @@ const AddEmployee = () => {
                             >
                                 {" "}
                                 <option value=""></option>
-                                <option value="fullTime">Full Time</option>
-                                <option value="partTime">Part Time</option>
+                                <option value="Full Time">Full Time</option>
+                                <option value="Part Time">Part Time</option>
                             </select>
                         </div>
 
                         {/* Status*/}
                         <div>
                             <label className="block text-gray-600 mb-1">Status</label>
-                            <select
+                            <select required
                                 onChange={(e) => {
                                     setEmpStatus(e.target.value);
                                 }}
@@ -237,7 +243,7 @@ const AddEmployee = () => {
                         </div>
                     </div>
                 </div>
-            </form>
+            </form> 
         </div>
     );
 };

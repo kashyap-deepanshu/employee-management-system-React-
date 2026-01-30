@@ -53,12 +53,12 @@ export default function ShowTask() {
   };
 
   return (
-    <div className="bg-white  rounded-xl border border-gray-200 shadow-sm h-full overflow-hidden">
+    <div className="bg-white  rounded-xl border border-gray-200 shadow-sm h-full ">
 
       {/* Header */}
       <div className="px-6 py-4 border-b flex justify-between items-center  ">
         <h2 className="text-lg font-semibold text-gray-800">
-          Tasks
+          Tasks:- {finalTasks.length}
         </h2>
 
         <input onChange={(e) => {
@@ -72,10 +72,11 @@ export default function ShowTask() {
       </div>
 
       {/* Table */}
-      <div className="overflow-y-auto h-full">
-        <table className="w-full text-sm">
+ <div className="overflow-y-auto max-h-[calc(100vh-220px)] no-scrollbar">        
+    <table className="w-full text-sm">
           <thead className="bg-gray-50 text-gray-600 uppercase  text-xs sticky top-0 ">
             <tr>
+              <th className="px-6 py-5 text-left">S.No</th>
               <th className="px-6 py-5 text-left">Task</th>
               <th className="px-6 py-5">Category</th>
               <th className="px-6 py-5">Created Date</th>
@@ -99,6 +100,8 @@ export default function ShowTask() {
               return (
                 <React.Fragment key={`${task.taskTitle}-${index}`}>
                   <tr key={index} className="hover:bg-gray-50">
+                                        <td className="px-6 py-4 text-center">{index+1}</td>
+
                     <td className="px-6 py-4">
                       <p className="font-medium text-gray-800">{task.taskTitle}</p>
                       <p className="text-xs text-gray-500">{task.taskDescription}</p>
@@ -137,9 +140,9 @@ export default function ShowTask() {
                   </tr>
 
                   {expandedTaskIndex === index && (
-                    <tr className="bg-gray-50" key={`${index}-details`}>
+                    <tr className="bg-gray-50 "  key={`${index}-details`}>
                       <td colSpan="6" className="px-6 py-4">
-                        <div className="text-sm text-gray-700 space-y-1">
+                        <div className="text-sm text-gray-700  space-y-1">
                           <p><b>Description:</b> {task.taskDescription}</p>
                           <p><b>Category:</b> {task.category}</p>
                           <p><b>Status:</b> {status.label}</p>

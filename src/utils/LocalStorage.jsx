@@ -1,7 +1,7 @@
 // localStorage.clear()
 const employees = [
     { 
-        id: 1,
+        id: '1',
         role: "employee",
         firstName: "Arjun",
         lastName: "Sharma",
@@ -55,7 +55,7 @@ const employees = [
     },
 
     {
-        id: 2,
+        id: '2',
         role: "employee",
         firstName: "Sneha",
         lastName: "Verma",
@@ -109,7 +109,7 @@ const employees = [
     },
 
     {
-        id: 3,
+        id: '3',
         role: "employee",
         firstName: "Ravi",
         lastName: "Kumar",
@@ -163,7 +163,7 @@ const employees = [
     },
 
     {
-        id: 4,
+        id: '4',
         role: "employee",
         firstName: "Priya",
         lastName: "Singh",
@@ -217,7 +217,7 @@ const employees = [
     },
 
     {
-        id: 5,
+        id: '5',
         role: "employee",
         firstName: "Karan",
         lastName: "Mehta",

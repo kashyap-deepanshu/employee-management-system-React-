@@ -10,6 +10,11 @@ const CreateTask = () => {
     const {authData, setAuthData ,taskIdCount,setTaskIdCount} = useContext(AuthContext); 
 
     const today = new Date().toISOString().split("T")[0];
+    function capitalizeFirstWord(str) {
+  if (!str) return str;
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
 
 
     // this is used to give select employee name option to create Task
@@ -27,7 +32,7 @@ const CreateTask = () => {
             completed: false,
             failed: false,
             taskTitle: taskTitle,
-            taskDescription: taskDescription,
+            taskDescription: capitalizeFirstWord(taskDescription),
             taskDate:today,
             taskDueDate: taskDueDate,
             category: taskCategory,
